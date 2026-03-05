@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Addy, This is for You</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    transition: background 2s;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+  }
+
+  .slide {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 30px;
+    max-width: 600px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0,0,0,0.3);
+    font-size: 1.4rem;
+  }
+
+  .slide.active { display: flex; }
+
+  h1, h2, p { margin: 20px 0; }
+  button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.8);
+    color: #333;
+    transition: transform 0.3s, background 0.3s;
+  }
+  button:hover {
+    transform: scale(1.1);
+    background: rgba(255,255,255,1);
+  }
+</style>
+</head>
+<body>
+
+<div class="slide active" data-bg="linear-gradient(135deg, #ff9a9e, #fad0c4)">
+  <h1 id="text1"></h1>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #a18cd1, #fbc2eb)">
+  <p id="text2"></p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #fbc2eb, #a6c1ee)">
+  <h2 id="text3"></h2>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #84fab0, #8fd3f4)">
+  <p id="text4"></p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #cfd9df, #e2ebf0)">
+  <h2 id="text5"></h2>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #fddb92, #d1fdff)">
+  <p id="text6"></p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #a1c4fd, #c2e9fb)">
+  <h2 id="text7"></h2>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #fccb90, #d57eeb)">
+  <p id="text8"></p>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #e0c3fc, #8ec5fc)">
+  <h2 id="text9"></h2>
+  <button onclick="nextSlide()">Next</button>
+</div>
+
+<div class="slide" data-bg="linear-gradient(135deg, #f093fb, #f5576c)">
+  <h1 id="text10"></h1>
+  <p>❤️ The end, my love ❤️</p>
+</div>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+
+const texts = [
+  "Addy… my heart has something to tell you. Click next and see…",
+  "You are my calm in the chaos, my laughter in silence, my light in darkness.",
+  "I dream of every tomorrow with you, hand in hand, heart to heart.",
+  "Every smile you give me, every glance, is a memory I cherish forever.",
+  "Your presence makes everything brighter, sweeter, more alive.",
+  "Even the stars in the sky can’t compare to the light you bring to me.",
+  "I promise to always stand by you, in storms and in sunshine.",
+  "With you, life feels like poetry, like colors I’ve never seen before.",
+  "Every beat of my heart whispers your name, endlessly.",
+  "Thank you for being my everything, Addy. Forever and always."
+];
+
+function typeText(element, text, i=0){
+  if(i < text.length){
+    element.innerHTML += text.charAt(i);
+    setTimeout(()=> typeText(element, text, i+1), 40);
+  }
+}
+
+typeText(document.getElementById('text1'), texts[0]);
+
+function nextSlide(){
+  slides[current].classList.remove('active');
+  current++;
+  if(current >= slides.length) return;
+  slides[current].classList.add('active');
+  document.body.style.background = slides[current].dataset.bg;
+
+  const el = slides[current].querySelector('h1, h2, p');
+  el.innerHTML = '';
+  typeText(el, texts[current]);
+}
+</script>
+
+</body>
+</html>
